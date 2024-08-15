@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>코딩네컷</title>
+    <style>
+      @font-face {
+        font-family: "LeeSeoyun";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff") format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      body {
+        font-family: "LeeSeoyun";
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        background-image: url("./background.png");
+      }
+
+      .container {
+        width: 390px;
+        background-color: #73ffb9;
+        height: 100%;
+      }
+
+      .photos {
+        margin-top: 30px;
+      }
+
+      .photo-frame {
+        background-color: white;
+        margin: 15px 20px;
+        height: 200px;
+        position: relative;
+        cursor: pointer;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .photo-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+      .footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 20px;
+      }
+
+      .f-title {
+        font-size: 25px;
+        font-weight: 900;
+        color: white;
+      }
+
+      .f-date {
+        font-size: 15px;
+        font-weight: 500;
+        color: white;
+      }
+
+      .copyright {
+        font-size: 12px;
+        font-weight: 500;
+        color: white;
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .photo-description {
+        color: white;
+        background-color: black;
+        width: fit-content;
+        padding: 0 20px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        position: absolute;
+        bottom: 0;
+        transform: translate(-50%);
+        left: 50%;
+        opacity: 0;
+      }
+
+      .showText {
+        opacity: 1;
+        transition: opacity 0.5s linear;
+      }
+
+      .hideText {
+        opacity: 0;
+      }
+
+      .photo-input {
+        display: none;
+      }
+    </style>
+    <script>
+      function showText(number) {
+        document.querySelector(`#desc${number}`).classList.remove("hideText");
+        document.querySelector(`#desc${number}`).classList.add("showText");
+      }
+
+      function hideText(number) {
+        document.querySelector(`#desc${number}`).classList.remove("showText");
+        document.querySelector(`#desc${number}`).classList.add("hideText");
+      }
+
+      function alertText(number) {
+        alert(`${number}번째 추억이에요! 눌러주셔서 감사합니다 :)`);
+      }
+
+      function loadImage(event, number) {
+        const image = document.querySelector(`#image${number}`);
+        image.src = URL.createObjectURL(event.target.files[0]);
+        image.onload = function() {
+          URL.revokeObjectURL(image.src); // 메모리 해제
+        }
+      }
+
+      function openFileDialog(number) {
+        const fileInput = document.querySelector(`#file-input${number}`);
+        fileInput.click();
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="photos">
+        <div class="photo-frame" onmouseover="showText(1)" onmouseout="hideText(1)" onclick="openFileDialog(1)">
+          <input type="file" id="file-input1" class="photo-input" accept="image/*" onchange="loadImage(event, 1)">
+          <img id="image1" class="photo-img" alt="어둠의 컴교 23">
+          <span id="desc1" class="photo-description hideText">어둠의 컴교 23</span>
+        </div>
+        <div class="photo-frame" onmouseover="showText(2)" onmouseout="hideText(2)" onclick="openFileDialog(2)">
+          <input type="file" id="file-input2" class="photo-input" accept="image/*" onchange="loadImage(event, 2)">
+          <img id="image2" class="photo-img" alt="알쓰 ㅍㅇㅌ!">
+          <span id="desc2" class="photo-description hideText">알쓰 ㅍㅇㅌ!</span>
+        </div>
+        <div class="photo-frame" onmouseover="showText(3)" onmouseout="hideText(3)" onclick="openFileDialog(3)">
+          <input type="file" id="file-input3" class="photo-input" accept="image/*" onchange="loadImage(event, 3)">
+          <img id="image3" class="photo-img" alt="시골쥐들의 서울 답사!">
+          <span id="desc3" class="photo-description hideText">시골쥐들의 서울 답사!</span>
+        </div>
+        <div class="photo-frame" onmouseover="showText(4)" onmouseout="hideText(4)" onclick="openFileDialog(4)">
+          <input type="file" id="file-input4" class="photo-input" accept="image/*" onchange="loadImage(event, 4)">
+          <img id="image4" class="photo-img" alt="맥 ㅍㅇㅌ!">
+          <span id="desc4" class="photo-description hideText">맥 ㅍㅇㅌ!</span>
+        </div>
+      </div>
+      <div class="footer">
+        <p class="f-title">KNUE computer education 23</p>
+        <p class="f-date">2024.07.29</p>
+        <p class="copyright">© 2024 한국교원대학교 컴퓨터교육과. All Rights Reserved.</p>
+      </div>
+    </div>
+  </body>
+</html>
